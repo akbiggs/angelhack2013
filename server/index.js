@@ -52,7 +52,7 @@ app.get("/reduce", function(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     var jobs_to_send = options.reduce_jobs;
     options.reduce_jobs = [];
-    res.json({reduce: jobs_to_send});
+    res.json({reduce: jobs_to_send, speed: reqsPerSec});
 });
 
 app.get("/done", function(req, res) {

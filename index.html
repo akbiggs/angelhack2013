@@ -8,7 +8,6 @@
         <script src="game/input.js"></script>
         <script src="game/vector.js"></script>
         <script src="game/player.js"></script>
-        <script src="game/enemy.js"></script>
 
         <script src="game/main.js"></script>
 
@@ -19,8 +18,15 @@
     </head>
     <body onLoad="startGame(); mapreduce();">
         <div id="game">
-            <canvas id="mainCanvas" width=400 height=400></canvas>
+            <h1 class="title">CANDY ROX</h1>
             <!-- Dynamically generated game content goes here. -->
+            <div id="inventory">
+                <p class="candies">You have 0 candy rocks.</p>
+            </div>
+            <div id="player">
+            </div>
+            <div id="world">
+            </div>
         </div>
         <div id="problem">
             <!-- Dynamically generated problem-solving content goes here. -->
