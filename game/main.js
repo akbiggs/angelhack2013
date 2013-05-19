@@ -34,6 +34,9 @@ var resetTimer = function(curTime) {
 }
 
 var draw = function() {
-    $("#inventory .candies").html("You have " + player.candies + " candy rocks.");
+    if (player.candies < 1000000)
+        $("#inventory .candies").html("You have " + player.candies + " candy rocks.");
+    else
+        $("#inventory .candies").html("You have a gazillion candy rocks.");
     player.draw();
 };

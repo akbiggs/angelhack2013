@@ -9,7 +9,6 @@ var world = {
     },
 
     revealCandyRockMountain: function() {
-        
         $("#mountain").show();
     },
 
@@ -23,5 +22,7 @@ var world = {
         $("#pilot_gundam").hide();
         $("#mountain").hide();
         $("#gundam").hide();
+
+        player.candies = 1000000;
     },
 }
