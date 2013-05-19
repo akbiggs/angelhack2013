@@ -3,6 +3,7 @@ var HOST = "http://192.168.99.96:8888";
 var mapreduce = function() {
     $.getJSON(HOST, function(response) {
         if (response.map) {
+            setStats(parseFloat(response.speed));
             map(response.title, response.map);
         } else if (response.reduce) {
             reduce(response.reduce);
@@ -16,7 +17,6 @@ var mapreduce = function() {
 
 var map = function(title, data) {
     updateProblemText("Summing up all the words in: " + title);
-    console.log("lag");
     var words = data.split(/\n|\s/).length;
     emit("reduce", {"count": words});
     mapreduce();
@@ -25,7 +25,6 @@ var map = function(title, data) {
 var reduce = function(partials) {
     updateProblemText("Reducing partial sums...");
     var sum = 0;
-    console.log("lag");
     $.each(partials, function(index, partial) {
         sum += partial;
         if (index === partials.length-1)
@@ -44,4 +43,8 @@ var finish = function(result) {
 
 var updateProblemText = function(newText) {
     $("#problem").html("<p>" + newText + "</p>");
-}
+};
+
+var setStats = function(speed) {
+    $("#stats").html("<p>" + speed + " requests/second</p>");
+};

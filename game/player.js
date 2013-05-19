@@ -12,6 +12,7 @@ var Player = function(pos) {
         minerals: 0,
         ozone: 0,
         rockets: 0,
+        exp: 0,
         resourcesUpdated: false,
 
         update: function(timeElapsed) {

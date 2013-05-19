@@ -1,5 +1,8 @@
 var PORT = 8888;
 
+var reqsPerSec = 0;
+var numReqs = 0;
+
 var express = require("express");
 var fs = require("fs");
 var path = require("path");
@@ -11,7 +14,14 @@ app.use(express.bodyParser());
 
 var startTime = new Date();
 
+setInterval(function() {
+    reqsPerSec = (reqsPerSec + numReqs) / 2.0;
+    numReqs = 0;
+    console.log("Requests per second: " + reqsPerSec);
+}, 1000);
+
 app.get("/", function(req, res) {
+    numReqs++;
     res.setHeader("Content-Type", "application/json");
     res.setHeader("Access-Control-Allow-Origin", "*");
     console.log("root");
@@ -27,7 +37,7 @@ app.get("/map", function(req, res) {
             res.json({error: err});
             res.end();
         } else {
-            res.json({title: req.query.file, map: data.toString()});
+            res.json({title: req.query.file, speed: reqsPerSec, map: data.toString()});
             res.end();
         }
     });
@@ -61,6 +71,7 @@ app.post("/emit/:phase", function(req, res) {
         case "reduce": 
             addReduceJob(parseInt(data.count));
             res.end();
+            break;
         case "finalize": 
             if (parseInt(data.sum) > options.result)
                 makeResult(parseInt(data.sum));
@@ -68,6 +79,7 @@ app.post("/emit/:phase", function(req, res) {
             var timeElapsed = curTime - startTime;
             console.log("Time to finish: " + timeElapsed * 1000);
             res.end();
+            break;
     }
 });
 
