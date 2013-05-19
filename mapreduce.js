@@ -1,4 +1,4 @@
-var HOST = "http://localhost:8888";
+var HOST = "http://192.168.99.96:8888";
 
 var mapreduce = function() {
     $.getJSON(HOST, function(response) {
