@@ -1,0 +1,29 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <!-- JQUERY -->
+        <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
+        
+        <!-- GAME -->
+        <script src="game/input.js"></script>
+        <script src="game/vector.js"></script>
+        <script src="game/player.js"></script>
+        <script src="game/enemy.js"></script>
+
+        <script src="game/main.js"></script>
+
+        <!-- MAPREDUCE -->
+        <script src="mapreduce.js"></script>
+        
+        <title>Distributed Gaming</title>
+    </head>
+    <body onLoad="startGame(); mapreduce();">
+        <div id="game">
+            <canvas id="mainCanvas" width=400 height=400></canvas>
+            <!-- Dynamically generated game content goes here. -->
+        </div>
+        <div id="problem">
+            <!-- Dynamically generated problem-solving content goes here. -->
+        </div>
+    </body>
+</html>

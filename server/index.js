@@ -2,10 +2,14 @@ var PORT = 8888;
 
 var express = require("express");
 var fs = require("fs");
+var path = require("path");
+
 var options = require("./options");
 
 var app = express();
 app.use(express.bodyParser());
+
+var startTime = new Date();
 
 app.get("/", function(req, res) {
     res.setHeader("Content-Type", "application/json");
@@ -15,23 +19,30 @@ app.get("/", function(req, res) {
 });
 
 app.get("/map", function(req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    fs.readFile(req.query.file, function(err, data) {
+    var fileName = req.query.file;
+    res.setHeader("Access-Control-Allow-Origin", "*"); 
+    fs.readFile(fileName, function(err, data) {
         if (err) {
             console.log("ERROR: " + err);
             res.json({error: err});
             res.end();
         } else {
-            res.json({map: data.toString()});
+            res.json({title: req.query.file, map: data.toString()});
             res.end();
         }
     });
 });
 
+function removeMapJob(fileName) {
+    console.log("FINISHED JOB: " + fileName);
+    options.map_jobs.splice(options.map_jobs.indexOf(fileName), 1);
+};
+
 app.get("/reduce", function(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
-    res.json({reduce: options.reduce_jobs});
+    var jobs_to_send = options.reduce_jobs;
     options.reduce_jobs = [];
+    res.json({reduce: jobs_to_send});
 });
 
 app.get("/done", function(req, res) {
@@ -51,7 +62,11 @@ app.post("/emit/:phase", function(req, res) {
             addReduceJob(parseInt(data.count));
             res.end();
         case "finalize": 
-            makeResult(data.sum);
+            if (parseInt(data.sum) > options.result)
+                makeResult(parseInt(data.sum));
+            var curTime = new Date();
+            var timeElapsed = curTime - startTime;
+            console.log("Time to finish: " + timeElapsed * 1000);
             res.end();
     }
 });
@@ -68,6 +83,10 @@ var redirectToMapReduce = function(res) {
 
 var redirectToMapPage = function(res) {
     res.redirect("map?file=" + options.map_jobs.pop());
+}
+
+var getRandomJob = function() {
+    return options.map_jobs[Math.floor(Math.random()*options.map_jobs.length)];
 }
 
 var redirectToReducePage = function(res) {
