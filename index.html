@@ -14,18 +14,41 @@
         <!-- MAPREDUCE -->
         <script src="mapreduce.js"></script>
         
-        <title>Distributed Gaming</title>
+        <title>Collably presents: Candy Rox</title>
     </head>
     <body onLoad="startGame(); mapreduce();">
         <div id="game">
-            <h1 class="title">CANDY ROX</h1>
+            <h1 class="title">COLLABLY PRESENTS: CANDY ROX HD EDITION</h1>
             <!-- Dynamically generated game content goes here. -->
             <div id="inventory">
                 <p class="candies">You have 0 candy rocks.</p>
             </div>
             <div id="player">
             </div>
+            <div id="actions">
+                <button id="eat_candy" onClick="player.eat_candies()">Eat 5
+                    candies.</button>
+                <button id="cheat" onCLick="player.cheat()">Cheat, you
+                    cheater.</button>
+                <button id="pilot_gundam" style="display: none;">Face your
+                    destiny and pilot the Gundam.</button>
+            </div>
             <div id="world">
+                <div id="mountain" style="display: none">
+                    <p>You have discovered candy rock mountain.</p>
+                    <p>Your vast amounts of candy rocks astound the candy rock
+                    people, causing them to worship you.</p>
+                </div>
+                <div id="gundam" style="display: none">
+                    <p>The candy rock people have constructed a Candy Rock
+                    Gundam out of the candy rock mountain for you.</p>
+                    <p>Candy rocks.</p>
+                </div>
+                <div id="space" style="display: none">
+                    <p>You rocket into space on your candy rock gundam.<p>
+                    <p>You dominate the candy rock universe and acquire vast
+                    amounts of candy rock wealth.</p>
+                </div>
             </div>
         </div>
         <div id="problem">
