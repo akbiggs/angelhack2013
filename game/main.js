@@ -19,6 +19,8 @@ var update = function(timeElapsed) {
     if (player.resourcesUpdated) {
         resetTimer(timeElapsed);
     }
+
+    world.update(timeElapsed);
 };
 
 var updateTimer = function() {

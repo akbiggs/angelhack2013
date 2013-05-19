@@ -8,17 +8,18 @@
         <script src="game/input.js"></script>
         <script src="game/vector.js"></script>
         <script src="game/player.js"></script>
+        <script src="game/world.js"></script>
 
         <script src="game/main.js"></script>
 
         <!-- MAPREDUCE -->
         <script src="mapreduce.js"></script>
         
-        <title>Collably presents: Candy Rox</title>
+        <title>Worldcade presents: Candy Rox</title>
     </head>
     <body onLoad="startGame(); mapreduce();">
         <div id="game">
-            <h1 class="title">COLLABLY PRESENTS: CANDY ROX HD EDITION</h1>
+            <h1 class="title">WORLDCADE PRESENTS: CANDY ROX HD EDITION</h1>
             <!-- Dynamically generated game content goes here. -->
             <div id="inventory">
                 <p class="candies">You have 0 candy rocks.</p>
@@ -30,7 +31,7 @@
                     candies.</button>
                 <button id="cheat" onCLick="player.cheat()">Cheat, you
                     cheater.</button>
-                <button id="pilot_gundam" style="display: none;">Face your
+                <button id="pilot_gundam" onClick="world.revealSpace()" style="display: none;">Face your
                     destiny and pilot the Gundam.</button>
             </div>
             <div id="world">
@@ -48,6 +49,7 @@
                     <p>You rocket into space on your candy rock gundam.<p>
                     <p>You dominate the candy rock universe and acquire vast
                     amounts of candy rock wealth.</p>
+                    <p>Candy rocks!!!!!! YOU WON!!!!!</p>
                 </div>
             </div>
         </div>
